@@ -29,3 +29,4 @@ E:\self\AIToolSelector\obj\Debug\net8.0\AIToolSelector.pdb
 E:\self\AIToolSelector\obj\Debug\net8.0\AIToolSelector.genruntimeconfig.cache
 E:\self\AIToolSelector\obj\Debug\net8.0\ref\AIToolSelector.dll
 E:\self\AIToolSelector\obj\Debug\net8.0\AIToolSelector.sourcelink.json
+E:\self\AIToolSelector\bin\Debug\net8.0\Data\tools.json

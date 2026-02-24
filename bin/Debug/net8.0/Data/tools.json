@@ -1,0 +1,23 @@
+[
+  { "name":"ChatGPT","category":"general","task":"writing","price":"free","level":"beginner" },
+  { "name":"Claude","category":"general","task":"writing","price":"paid","level":"advanced" },
+  { "name":"Gemini","category":"general","task":"writing","price":"free","level":"beginner" },
+
+  { "name":"GitHub Copilot","category":"coding","task":"coding","price":"paid","level":"advanced" },
+  { "name":"Codeium","category":"coding","task":"coding","price":"free","level":"beginner" },
+  { "name":"Replit AI","category":"coding","task":"coding","price":"free","level":"beginner" },
+
+  { "name":"Midjourney","category":"image","task":"design","price":"paid","level":"advanced" },
+  { "name":"DALL·E","category":"image","task":"design","price":"paid","level":"beginner" },
+  { "name":"Leonardo AI","category":"image","task":"design","price":"free","level":"beginner" },
+
+  { "name":"Runway ML","category":"video","task":"video","price":"paid","level":"advanced" },
+  { "name":"Pika","category":"video","task":"video","price":"free","level":"beginner" },
+  { "name":"Synthesia","category":"video","task":"video","price":"paid","level":"beginner" },
+
+  { "name":"Excel Formula Bot","category":"productivity","task":"excel","price":"free","level":"beginner" },
+  { "name":"SheetAI","category":"productivity","task":"excel","price":"paid","level":"advanced" },
+
+  { "name":"AstroGPT","category":"special","task":"astrology","price":"free","level":"beginner" },
+  { "name":"AstroSeek AI","category":"special","task":"astrology","price":"paid","level":"advanced" }
+]
