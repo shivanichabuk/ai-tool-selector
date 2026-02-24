@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AIToolSelector")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d699822e26c6aeb6d1a4e22346750ddda329ac4e")]
 [assembly: System.Reflection.AssemblyProductAttribute("AIToolSelector")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AIToolSelector")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

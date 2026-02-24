@@ -16,15 +16,35 @@ public class IndexModel : PageModel
 
     public string Result { get; set; }
 
-    public void OnPost()
+   public void OnPost()
+{
+    var tools = new List<(string Name, string Task, string Budget, string Level)>
     {
-        if (Task == "writing" && Budget == "free")
-            Result = "ChatGPT Free";
+        ("ChatGPT", "writing", "free", "beginner"),
+        ("GitHub Copilot", "coding", "paid", "advanced"),
+        ("Canva AI", "design", "free", "beginner"),
+        ("Midjourney", "design", "paid", "advanced"),
+        ("Claude", "writing", "paid", "advanced")
+    };
 
-        else if (Task == "coding")
-            Result = "GitHub Copilot";
+    int bestScore = -1;
+    string bestTool = "No match found";
 
-        else
-            Result = "Canva AI";
+    foreach (var tool in tools)
+    {
+        int score = 0;
+
+        if (tool.Task == Task) score += 2;
+        if (tool.Budget == Budget) score += 1;
+        if (tool.Level == Level) score += 1;
+
+        if (score > bestScore)
+        {
+            bestScore = score;
+            bestTool = tool.Name;
+        }
     }
+
+    Result = bestTool;
+}
 }
