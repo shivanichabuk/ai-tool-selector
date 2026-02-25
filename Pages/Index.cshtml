@@ -40,7 +40,36 @@
     @if (Model.Result != null)
     {
         <div class="alert alert-success mt-4">
-            Recommended Tool: <strong>@Model.Result</strong>
+            @if (Model.Tools != null && Model.Tools.Any())
+{
+    <div class="mt-4">
+        <h4>Top Recommendations</h4>
+
+        @foreach (var tool in Model.Tools)
+        {
+            <div class="card shadow-sm mb-3 border-0">
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        @tool.Name
+                        <span class="badge bg-success ms-2">Best Match</span>
+                    </h5>
+
+                    <p class="card-text">
+                        Category: <b>@tool.Category</b><br />
+                        Price: <b>@tool.Price</b><br />
+                        Level: <b>@tool.Level</b>
+                    </p>
+
+                    <a href="#" class="btn btn-primary btn-sm">
+                        Open Tool
+                    </a>
+
+                </div>
+            </div>
+        }
+    </div>
+}
         </div>
     }
 </div>

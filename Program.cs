@@ -1,66 +1,39 @@
 using System.Text.Json;
 using AIToolSelector.Models;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddRazorPages();
-
 var app = builder.Build();
-
-
+builder.Services.AddHttpClient();
 List<Tool> tools = new();
 
 if (File.Exists("Data/tools.json"))
 {
     var json = File.ReadAllText("Data/tools.json");
-    tools = JsonSerializer.Deserialize<List<Tool>>(json);
+    tools = JsonSerializer.Deserialize<List<Tool>>(json) ?? new List<Tool>();
 }
 
-app.MapGet("/api/tools", () => tools); 
-
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-List<Tool> tools = new();
-
-if (File.Exists("Data/tools.json"))
-{
-    var json = File.ReadAllText("Data/tools.json");
-    tools = JsonSerializer.Deserialize<List<Tool>>(json);
-}
-
-// API 1 — list all tools
+// list all tools
 app.MapGet("/api/tools", () => tools);
 
-// API 2 — recommendation logic  ← PASTE HERE
+// recommendation logic
 app.MapGet("/api/recommend", (string task, string price, string level) =>
 {
-    var results = tools
-        .Where(t =>
-            t.Task == task &&
-            t.Price == price &&
-            t.Level == level)
+    var ranked = tools
+        .Select(t => new
+        {
+            Tool = t,
+            Score =
+                (t.Task.Equals(task, StringComparison.OrdinalIgnoreCase) ? 3 : 0) +
+                (t.Price.Equals(price, StringComparison.OrdinalIgnoreCase) ? 2 : 0) +
+                (t.Level.Equals(level, StringComparison.OrdinalIgnoreCase) ? 1 : 0)
+        })
+        .OrderByDescending(x => x.Score)
         .ToList();
 
-    return results.Count > 0 ? results : tools.Where(t => t.Task == task);
+    if (ranked.Count == 0)
+        return Results.NotFound("No tools available");
+
+    return ranked.Take(3).Select(x => x.Tool);
 });
-
-app.Run();
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapRazorPages();
 
 app.Run();

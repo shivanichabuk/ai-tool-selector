@@ -1,10 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Net.Http.Json;
+using AIToolSelector.Models;
 
 namespace AIToolSelector.Pages;
 
 public class IndexModel : PageModel
 {
+    private readonly IHttpClientFactory _httpFactory;
+
+    public IndexModel(IHttpClientFactory httpFactory)
+    {
+        _httpFactory = httpFactory;
+    }
+
     [BindProperty]
     public string Task { get; set; }
 
@@ -14,37 +23,18 @@ public class IndexModel : PageModel
     [BindProperty]
     public string Level { get; set; }
 
-    public string Result { get; set; }
+    public List<Tool> Tools { get; set; } = new();
 
-   public void OnPost()
-{
-    var tools = new List<(string Name, string Task, string Budget, string Level)>
+    public async Task OnPostAsync()
     {
-        ("ChatGPT", "writing", "free", "beginner"),
-        ("GitHub Copilot", "coding", "paid", "advanced"),
-        ("Canva AI", "design", "free", "beginner"),
-        ("Midjourney", "design", "paid", "advanced"),
-        ("Claude", "writing", "paid", "advanced")
-    };
+        var client = _httpFactory.CreateClient();
 
-    int bestScore = -1;
-    string bestTool = "No match found";
+        string url =
+            $"https://ai-tool-selector-1.onrender.com/api/recommend?task={Task}&price={Budget}&level={Level}";
 
-    foreach (var tool in tools)
-    {
-        int score = 0;
+        var result = await client.GetFromJsonAsync<List<Tool>>(url);
 
-        if (tool.Task == Task) score += 2;
-        if (tool.Budget == Budget) score += 1;
-        if (tool.Level == Level) score += 1;
-
-        if (score > bestScore)
-        {
-            bestScore = score;
-            bestTool = tool.Name;
-        }
+        if (result != null)
+            Tools = result;
     }
-
-    Result = bestTool;
-}
 }
