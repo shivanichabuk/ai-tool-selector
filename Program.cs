@@ -2,20 +2,34 @@ using System.Text.Json;
 using AIToolSelector.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+
+builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
+
+var app = builder.Build();
+
+app.UseStaticFiles();
+app.UseRouting();
+app.MapRazorPages();
+
 List<Tool> tools = new();
 
-if (File.Exists("Data/tools.json"))
+var path = Path.Combine(AppContext.BaseDirectory, "Data", "tools.json");
+
+if (File.Exists(path))
 {
-    var json = File.ReadAllText("Data/tools.json");
-    tools = JsonSerializer.Deserialize<List<Tool>>(json) ?? new List<Tool>();
+    var json = File.ReadAllText(path);
+   var options = new JsonSerializerOptions
+{
+    PropertyNameCaseInsensitive = true
+};
+
+tools = JsonSerializer.Deserialize<List<Tool>>(json, options) ?? new();
 }
 
-// list all tools
+// GET all tools
 app.MapGet("/api/tools", () => tools);
 
-// recommendation logic
 app.MapGet("/api/recommend", (string task, string price, string level) =>
 {
     var ranked = tools
@@ -23,17 +37,15 @@ app.MapGet("/api/recommend", (string task, string price, string level) =>
         {
             Tool = t,
             Score =
-                (t.Task.Equals(task, StringComparison.OrdinalIgnoreCase) ? 3 : 0) +
-                (t.Price.Equals(price, StringComparison.OrdinalIgnoreCase) ? 2 : 0) +
-                (t.Level.Equals(level, StringComparison.OrdinalIgnoreCase) ? 1 : 0)
+                (t.Task?.ToLower() == task.ToLower() ? 3 : 0) +
+                (t.Price?.ToLower() == price.ToLower() ? 2 : 0) +
+                (t.Level?.ToLower() == level.ToLower() ? 1 : 0)
         })
         .OrderByDescending(x => x.Score)
+        .Select(x => x.Tool)
+        .Take(3)
         .ToList();
 
-    if (ranked.Count == 0)
-        return Results.NotFound("No tools available");
-
-    return ranked.Take(3).Select(x => x.Tool);
+    return ranked;
 });
-
 app.Run();

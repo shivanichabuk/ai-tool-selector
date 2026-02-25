@@ -24,17 +24,25 @@ public class IndexModel : PageModel
     public string Level { get; set; }
 
     public List<Tool> Tools { get; set; } = new();
-
     public async Task OnPostAsync()
+{
+    var client = _httpFactory.CreateClient();
+
+    var baseUrl = $"{Request.Scheme}://{Request.Host}";
+    var url = $"{baseUrl}/api/recommend?task={Task}&price={Budget}&level={Level}";
+
+    try
     {
-        var client = _httpFactory.CreateClient();
-
-        string url =
-            $"https://ai-tool-selector-1.onrender.com/api/recommend?task={Task}&price={Budget}&level={Level}";
-
         var result = await client.GetFromJsonAsync<List<Tool>>(url);
 
         if (result != null)
             Tools = result;
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+        Tools = new List<Tool>();
+    }
+}
+
 }

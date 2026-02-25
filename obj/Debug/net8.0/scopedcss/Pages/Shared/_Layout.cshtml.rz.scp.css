@@ -46,3 +46,7 @@ button.accept-policy[b-vwg743wr68] {
   white-space: nowrap;
   line-height: 60px;
 }
+.best-card[b-vwg743wr68] {
+    transform: scale(1.02);
+    transition: 0.2s;
+}

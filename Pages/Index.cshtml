@@ -12,10 +12,20 @@
         <div class="mb-3">
             <label class="form-label">Task</label>
             <select class="form-select" name="Task">
-                <option value="writing">Writing</option>
-                <option value="coding">Coding</option>
-                <option value="design">Design</option>
-            </select>
+<option value="writing">Writing</option>
+<option value="coding">Coding</option>
+<option value="image">Image</option>
+<option value="video">Video</option>
+<option value="logo">Logo</option>
+<option value="avatar">Avatar</option>
+<option value="notes">Notes</option>
+<option value="excel">Excel</option>
+<option value="website">Website</option>
+<option value="presentation">Presentation</option>
+<option value="study">Study</option>
+<option value="paraphrase">Paraphrase</option>
+<option value="astrology">Astrology</option>
+</select>
         </div>
 
         <div class="mb-3">
@@ -37,39 +47,77 @@
         <button type="submit" class="btn btn-primary">Get Recommendation</button>
     </form>
 
-    @if (Model.Result != null)
-    {
-        <div class="alert alert-success mt-4">
-            @if (Model.Tools != null && Model.Tools.Any())
+    
+    @if (Model.Tools != null && Model.Tools.Any())
 {
-    <div class="mt-4">
-        <h4>Top Recommendations</h4>
+    <div class="mt-5">
 
-        @foreach (var tool in Model.Tools)
-        {
-            <div class="card shadow-sm mb-3 border-0">
-                <div class="card-body">
+        <!-- TOP RESULT -->
+        <h4 class="mb-3 text-success">⭐ Recommended for You</h4>
 
-                    <h5 class="card-title">
-                        @tool.Name
-                        <span class="badge bg-success ms-2">Best Match</span>
-                    </h5>
+        @{
+            var best = Model.Tools.First();
+        }
 
-                    <p class="card-text">
-                        Category: <b>@tool.Category</b><br />
-                        Price: <b>@tool.Price</b><br />
-                        Level: <b>@tool.Level</b>
-                    </p>
+        <div class="card shadow border-success mb-4  best-card">
+            <div class="card-body">
 
-                    <a href="#" class="btn btn-primary btn-sm">
+                <h4 class="card-title">
+                    @best.Name
+                    <span class="badge bg-success ms-2">Best Match</span>
+                </h4>
+
+                <p class="mb-2 text-muted">
+                    Best for <b>@best.Category</b>
+                </p>
+
+                <small class="text-secondary">
+                    @best.Price • @best.Level
+                </small>
+
+                <div class="mt-3">
+                    <a href="#" class="btn btn-success">
                         Open Tool
                     </a>
-
                 </div>
+
             </div>
-        }
-    </div>
-}
         </div>
-    }
+
+
+        <!-- OTHER OPTIONS -->
+        @if (Model.Tools.Count > 1)
+        {
+            <h5 class="mb-3">Other Options</h5>
+
+            @foreach (var tool in Model.Tools.Skip(1))
+            {
+                <div class="card mb-3 shadow-sm border-0">
+                    <div class="card-body">
+
+                        <h5 class="card-title">@tool.Name</h5>
+
+                        <p class="mb-1 text-muted">
+                            Best for <b>@tool.Category</b>
+                        </p>
+
+                        <small class="text-secondary">
+                            @tool.Price • @tool.Level
+                        </small>
+
+                        <div class="mt-2">
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                Open Tool
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+}  
+
+        
 </div>

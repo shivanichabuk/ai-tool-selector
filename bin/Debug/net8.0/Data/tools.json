@@ -7,16 +7,24 @@
   { "name":"Codeium","category":"coding","task":"coding","price":"free","level":"beginner" },
   { "name":"Replit AI","category":"coding","task":"coding","price":"free","level":"beginner" },
 
-  { "name":"Midjourney","category":"image","task":"design","price":"paid","level":"advanced" },
-  { "name":"DALL·E","category":"image","task":"design","price":"paid","level":"beginner" },
-  { "name":"Leonardo AI","category":"image","task":"design","price":"free","level":"beginner" },
+  { "name":"Midjourney","category":"image","task":"image","price":"paid","level":"advanced" },
+  { "name":"Leonardo AI","category":"image","task":"image","price":"free","level":"beginner" },
+  { "name":"Ideogram","category":"image","task":"logo","price":"free","level":"beginner" },
 
   { "name":"Runway ML","category":"video","task":"video","price":"paid","level":"advanced" },
   { "name":"Pika","category":"video","task":"video","price":"free","level":"beginner" },
-  { "name":"Synthesia","category":"video","task":"video","price":"paid","level":"beginner" },
+  { "name":"HeyGen","category":"video","task":"avatar","price":"paid","level":"advanced" },
 
+  { "name":"Notion AI","category":"productivity","task":"notes","price":"paid","level":"beginner" },
   { "name":"Excel Formula Bot","category":"productivity","task":"excel","price":"free","level":"beginner" },
   { "name":"SheetAI","category":"productivity","task":"excel","price":"paid","level":"advanced" },
+
+  { "name":"Durable AI","category":"business","task":"website","price":"paid","level":"beginner" },
+  { "name":"Looka","category":"business","task":"logo","price":"paid","level":"beginner" },
+  { "name":"Tome AI","category":"business","task":"presentation","price":"free","level":"beginner" },
+
+  { "name":"TutorAI","category":"education","task":"study","price":"free","level":"beginner" },
+  { "name":"Quillbot","category":"education","task":"paraphrase","price":"free","level":"beginner" },
 
   { "name":"AstroGPT","category":"special","task":"astrology","price":"free","level":"beginner" },
   { "name":"AstroSeek AI","category":"special","task":"astrology","price":"paid","level":"advanced" }
