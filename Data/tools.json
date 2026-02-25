@@ -21,7 +21,8 @@
 
   { "name":"Durable AI","category":"business","task":"website","price":"paid","level":"beginner" },
   { "name":"Looka","category":"business","task":"logo","price":"paid","level":"beginner" },
-  { "name":"Tome AI","category":"business","task":"presentation","price":"free","level":"beginner" },
+  { "name":"LogoAI","category":"business","task":"logo","price":"free","level":"beginner" },
+  { "name":"Gamma","category":"business","task":"presentation","price":"free","level":"beginner" },
 
   { "name":"TutorAI","category":"education","task":"study","price":"free","level":"beginner" },
   { "name":"Quillbot","category":"education","task":"paraphrase","price":"free","level":"beginner" },

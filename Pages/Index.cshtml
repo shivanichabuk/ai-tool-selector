@@ -1,7 +1,8 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "AI Tool Finder";
+    ViewData["Title"] = "Best AI Tools 2026 | Free & Paid AI Tool Finder";
+    ViewData["Description"] = "Compare the best AI tools for writing, coding, image editing, video generation, Excel and astrology. Find free and paid AI tools instantly.";
 }
 
 <div class="container mt-5 text-center">
@@ -11,43 +12,44 @@
     <form method="post" class="mt-4">
         <div class="mb-3">
             <label class="form-label">Task</label>
-            <select class="form-select" name="Task">
-<option value="writing">Writing</option>
-<option value="coding">Coding</option>
-<option value="image">Image</option>
-<option value="video">Video</option>
-<option value="logo">Logo</option>
-<option value="avatar">Avatar</option>
-<option value="notes">Notes</option>
-<option value="excel">Excel</option>
-<option value="website">Website</option>
-<option value="presentation">Presentation</option>
-<option value="study">Study</option>
-<option value="paraphrase">Paraphrase</option>
-<option value="astrology">Astrology</option>
+<select class="form-select" asp-for="Task">
+    <option value="writing">Writing</option>
+    <option value="coding">Coding</option>
+    <option value="image">Image</option>
+    <option value="video">Video</option>
+    <option value="logo">Logo</option>
+    <option value="avatar">Avatar</option>
+    <option value="notes">Notes</option>
+    <option value="excel">Excel</option>
+    <option value="website">Website</option>
+    <option value="presentation">Presentation</option>
+    <option value="study">Study</option>
+    <option value="paraphrase">Paraphrase</option>
+    <option value="astrology">Astrology</option>
 </select>
+
         </div>
 
         <div class="mb-3">
             <label class="form-label">Budget</label>
-            <select class="form-select" name="Budget">
-                <option value="free">Free</option>
-                <option value="paid">Paid</option>
-            </select>
+         <select class="form-select" asp-for="Budget">
+            <option value="free">Free</option>
+            <option value="paid">Paid</option>
+        </select>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Skill Level</label>
-            <select class="form-select" name="Level">
-                <option value="beginner">Beginner</option>
-                <option value="advanced">Advanced</option>
+            <select class="form-select" asp-for="Level">
+            <option value="beginner">Beginner</option>
+            <option value="advanced">Advanced</option>
             </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Get Recommendation</button>
     </form>
 
-    
+
     @if (Model.Tools != null && Model.Tools.Any())
 {
     <div class="mt-5">
@@ -118,6 +120,11 @@
 
     </div>
 }  
-
+    @else 
+{
+    <div class="alert alert-warning mt-4">
+        No exact match found. Try changing your filters.
+    </div>
+}
         
 </div>
